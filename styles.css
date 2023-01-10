@@ -1,0 +1,65 @@
+/* Remove padding and margin */ 
+*  
+    { 
+    margin: 0; 
+    padding: 0; 
+    border: 0; 
+    box-sizing: border-box;
+}
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.calculator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+
+    padding-top: 24px;
+    padding-bottom: 24px;
+    
+    height: 600px;
+    width: 400px;
+    border: 2px solid black;
+    border-radius: 8px;
+    background-color: gray;
+}
+
+.display {
+    height: 100px;
+    width: 375px;
+    border: 2px solid black;
+    background-color: beige;
+    border-radius: 8px;
+}
+
+.buttons-container, .top-row, .bottom-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+}
+
+.bottom-row {
+    justify-content: space-around;
+}
+
+#clear, #delete {
+    height: 60px;
+    width: 165px;
+    border: 2px solid black;
+    background-color: beige;
+    border-radius: 8px;
+}
+
+
+.button {
+    height: 60px;
+    width: 74px;
+    border: 2px solid black;
+    background-color: beige;
+    border-radius: 8px;
+}
