@@ -34,12 +34,21 @@ const output = document.querySelector('.output');
 const inputLog = document.querySelector('.input-log');
 
 let firstNumber = '';
-let secondNumber = null;
+let secondNumber = '';
 let operator = null;
 let result = null;
+let runningResult = null;
 
 const numbers = document.querySelectorAll('.number');
 const operators = document.querySelectorAll('.operator');
+
+operators.forEach((op) => {
+    op.addEventListener('click', (event) => {
+        operator = event.target.getAttribute('id');
+        console.log(operator);
+        populateInputLog(event.target.textContent);
+    })
+})
 // console.log(operators);
 // console.log(numbers);
 
@@ -50,11 +59,31 @@ const operators = document.querySelectorAll('.operator');
 
 numbers.forEach((number) => {
     number.addEventListener('click', (event) => {
-        if(firstNumber.length === 0 || operator === null) {            
+        if(operator === null) {  // if operator has not yet been selected, meaning still acquiring first number          
             firstNumber += event.target.getAttribute('id');
-            console.log(firstNumber);
         }
+        else{
+            secondNumber += event.target.getAttribute('id');
+        }
+
+        // if(secondNumber !== '' && operator !== null) {
+        //     runningResult = operate(operator, parseInt(firstNumber), parseInt(secondNumber));
+        // }
+
+        console.log(`first num - ${firstNumber}`);
+        console.log(`second num - ${secondNumber}`);
+        populateInputLog(event.target.getAttribute('id'));
     })
+})
+
+const equalsButton = document.querySelector('#equals');
+
+equalsButton.addEventListener('click', (event) => {
+    let result = operate(operator, parseInt(firstNumber), parseInt(secondNumber));
+    firstNumber = result;
+    secondNumber = '';
+    populateOutput(result);
+    populateInputLog(event.target.textContent + " " + result);
 })
 
 
@@ -63,14 +92,26 @@ function populateOutput(num) {
 }
 
 function populateInputLog(input) {
-    if(inputLog.textContent.length === 0) {
-        inputLog.textContent += `${input}`;
+    if (input === 'x' || input === '+' || input === '-' || input === '÷'){
+        inputLog.textContent += ` ${input} `;
     }
     else {
-        inputLog.textContent += ` ${input}`;
+        inputLog.textContent += `${input}`;
 
     }
     
 }
+
+const clear = document.querySelector('#clear');
+
+clear.addEventListener('click', () => {
+    firstNumber = '';
+    secondNumber = '';
+    operator = null;
+    result = null;
+
+    inputLog.textContent = '';
+    output.textContent = '';
+})
 
 
